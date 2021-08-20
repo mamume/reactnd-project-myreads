@@ -3,6 +3,7 @@ import React from 'react';
 import './App.css';
 import Search from './routes/Search'
 import Home from './routes/Home'
+import { Route } from 'react-router-dom';
 
 class BooksApp extends React.Component {
   state = {
@@ -12,19 +13,19 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false
+    // showSearchPage: false
   }
 
-  onNavigate = (boolValue) => {
-    this.setState({
-      showSearchPage: boolValue
-    })
-  }
+  // onNavigate = (boolValue) => {
+  //   this.setState({
+  //     showSearchPage: boolValue
+  //   })
+  // }
 
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
+        {/* {this.state.showSearchPage ? (
           <Search
             setSearchPage={this.onNavigate}
           />
@@ -32,7 +33,10 @@ class BooksApp extends React.Component {
           <Home
             setSearchPage={this.onNavigate}
           />
-        )}
+        )} */}
+
+        <Route exact path='/' component={Home} />
+        <Route path='/search' component={Search} />
       </div>
     )
   }

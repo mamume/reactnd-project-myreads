@@ -4,7 +4,7 @@ import * as BookAPI from '../BooksAPI'
 
 export default class BookShelf extends Component {
     render() {
-        console.log(this.props.books)
+        // console.log(this.props.books)
 
         return (
             <div className="bookshelf">
@@ -14,9 +14,11 @@ export default class BookShelf extends Component {
 
                         {Object.keys(this.props.books).map(index => (
                             <li><Book
-                                id={this.props.books[index].id}
-                                title={this.props.books[index].title}
-                                authors={this.props.books[index].authors}
+                                // id={this.props.books[index].id}
+                                // title={this.props.books[index].title}
+                                // authors={this.props.books[index].authors}
+
+                                book={this.props.books[index]}
                             /></li>
                         ))}
 
