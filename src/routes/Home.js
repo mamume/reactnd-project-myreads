@@ -44,6 +44,7 @@ export default class Home extends Component {
                 // console.log("currently", this.state.currentlyReading)
                 // console.log("want", this.state.wantToRead)
                 // console.log("read", this.state.read)
+                // console.log(this.state.wantToRead.map(book => book))
             });
     }
 
