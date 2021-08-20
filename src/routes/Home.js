@@ -13,15 +13,40 @@ export default class Home extends Component {
     componentDidMount() {
         BooksAPI.getAll()
             .then(result => {
-                const keys = Object.keys(result)
+                // const keys = Object.keys(result)
+                // console.log(result[1])
+                // console.log(keys.filter(index => result[index].shelf === 'currentlyReading').map(i => result[i]))
+                // this.setState({
+                //     allBooks: result,
+                //     currentlyReading: keys.filter(index => result[index].shelf === 'currentlyReading').map(i => result[i]),
+                //     wantToRead: keys.filter(index => result[index].shelf === 'wantToRead').map(i => result[i]),
+                //     read: keys.filter(index => result[index].shelf === 'read').map(i => result[i])
+                // });
+
+                let currentlyReading = []
+                let wantToRead = []
+                let read = []
+                for (const book of result) {
+                    if (book.shelf === "currentlyReading")
+                        currentlyReading.push(book)
+                    else if (book.shelf === "wantToRead")
+                        wantToRead.push(book)
+                    else
+                        read.push(book)
+                }
+
                 this.setState({
-                    allBooks: result,
-                    currentlyReading: keys.filter(index => result[index].shelf === 'currentlyReading').map(i => result[i]),
-                    wantToRead: keys.filter(index => result[index].shelf === 'wantToRead').map(i => result[i]),
-                    read: keys.filter(index => result[index].shelf === 'read').map(i => result[i])
-                });
+                    currentlyReading,
+                    wantToRead,
+                    read
+                })
+
+                // console.log("currently", this.state.currentlyReading)
+                // console.log("want", this.state.wantToRead)
+                // console.log("read", this.state.read)
             });
     }
+
 
     render() {
         return (

@@ -6,7 +6,6 @@ import { Route } from 'react-router-dom'
 export default class Book extends Component {
     changeShelf = (event) => {
         BooksAPI.update(this.props.book, event.target.value);
-
     }
 
     render() {
