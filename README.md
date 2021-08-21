@@ -34,7 +34,7 @@ To install dependancies and start the project:
     │   ├── BookShelf.js # Componant for shelf.
     │   ├── BookShelfChanger.js # Componant for shelf selector.
     │   └── SearchResult.js # componant for search result.
-    ├── routes # Contain routes components.
+    └── routes # Contain routes components.
         ├── Home.js # Home page component for shelves.
         └── Search.js # Search page componant.
 ```
