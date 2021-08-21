@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 import * as BookAPI from '../BooksAPI'
 import SearchResult from './SearchResult'
+import { DebounceInput } from 'react-debounce-input';
 
 export default class Search extends Component {
     constructor() {
@@ -16,13 +17,15 @@ export default class Search extends Component {
         this.updateResult = this.updateResult.bind(this)
     }
 
-    handleChange(event) {
-        console.log('query before', this.state.query)
-        console.log('value', event.target)
+    handleChange(value) {
+        // console.log('query before', this.state.query)
+        // console.log('value', event.target.value)
 
+        // if (/^[a-zA-Z]+$/.test(event.target.value))
         this.setState({
-            query: event.target.value
+            query: value
         }, this.search)
+
 
         // const { name, value } = event.target
         // this.setState({
@@ -40,17 +43,24 @@ export default class Search extends Component {
         // let result = []
         // console.log(this.state.query.trim())
         BookAPI.search(this.state.query.trim())
-            .then(response => this.setState({
-                result: response
-            }))
-            .then(() => console.log(this.state.result))
+            .then(response => {
+                // console.log('response', response)
+                if (response && !response.error)
+                    this.setState({
+                        result: response
+                    })
+                else
+                    this.setState({
+                        result: []
+                    })
+            })
+        // .then(() => console.log(this.state.result))
 
     }
 
     updateResult(book, shelf) {
         BookAPI.update(book, shelf)
-
-        this.search()
+            .then(() => this.handleChange(this.state.query))
     }
 
     render() {
@@ -70,11 +80,13 @@ export default class Search extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                            <input
+                            <DebounceInput
+                                minLength={2}
+                                debounceTimeout={300}
                                 type="text"
                                 name="query"
                                 placeholder="Search by title or author"
-                                onChange={this.handleChange}
+                                onChange={(event) => this.handleChange(event.target.value)}
                                 value={this.state.query}
                             />
                         </div>
