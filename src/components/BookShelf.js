@@ -1,5 +1,5 @@
 import React from 'react'
-import Book from './Book'
+import Book from '../routes/Book'
 
 export default function BookShelf(props) {
     return (
@@ -8,6 +8,7 @@ export default function BookShelf(props) {
             <div className="bookshelf-books">
                 <ol className="books-grid">
 
+                    {/* For every book render Book component passing book attributes and a method for change shelf */}
                     {props.books.map(book => (
                         <li key={book.id}>
                             <Book
