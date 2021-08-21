@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Link, Router } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 
 export default class Search extends Component {
     render() {
