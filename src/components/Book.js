@@ -20,7 +20,7 @@ export default function Book(props) {
 
             {/* Render book info from props */}
             <div className="book-title">{props.title}</div>
-            <div className="book-authors">{props.authors.join(', ')}</div>
+            <div className="book-authors">{props.authors ? props.authors.join(', '): ""}</div>
         </div>
     )
 }
