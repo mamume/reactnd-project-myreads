@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as BookAPI from '../BooksAPI'
-import SearchResult from './SearchResult'
+import SearchResult from '../components/SearchResult'
 import { DebounceInput } from 'react-debounce-input';
 
 export default class Search extends Component {
