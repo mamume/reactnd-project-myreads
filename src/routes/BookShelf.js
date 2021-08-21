@@ -9,10 +9,9 @@ export default function BookShelf(props) {
                 <ol className="books-grid">
 
                     {props.books.map(book => (
-                        <li>
+                        <li key={book.id}>
                             <Book
                                 // book={book}
-                                key={book.id}
                                 {...book}
                                 changeShelf={props.changeShelf}
                             />

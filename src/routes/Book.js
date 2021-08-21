@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import BookShelfChanger from './BookShelfChanger'
 // import * as BooksAPI from '../BooksAPI'
 // import { Route } from 'react-router-dom'
@@ -19,9 +19,9 @@ export default function Book(props) {
 
 
                 <BookShelfChanger
-                    key={props.id}
                     id={props.id}
                     shelf={props.shelf}
+                    book={props}
                     changeShelf={props.changeShelf}
                 />
             </div>

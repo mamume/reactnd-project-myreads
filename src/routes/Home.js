@@ -7,7 +7,7 @@ export default class Home extends Component {
     constructor() {
         super()
         this.state = {
-            allBooks: [],
+            // allBooks: [],
             currentlyReading: [],
             wantToRead: [],
             read: []
@@ -44,7 +44,7 @@ export default class Home extends Component {
                 }
 
                 this.setState({
-                    allBooks: result,
+                    // allBooks: result,
                     currentlyReading,
                     wantToRead,
                     read
@@ -58,22 +58,38 @@ export default class Home extends Component {
             });
     }
 
-    changeShelf(bookID, shelf) {
+    changeShelf(book, shelf) {
         // console.log(this.state.allBooks)
         // BooksAPI.update(this.props, event.target.value);
 
         // console.log(bookID, shelf)
         // let updatedBooks = []
 
-        for (const book of this.state.allBooks) {
-            if (book.id === bookID) {
-                BooksAPI.update(book, shelf)
-                    .then(response => this.componentDidMount())
-                // book.shelf = shelf
-            }
+        // console.log(this.state[shelf])
 
-            // updatedBooks.push(book)
-        }
+        // for (const book of this.state[shelf]) {
+        //     if (book.id === bookID) {
+        //         BooksAPI.update(book, shelf)
+        //             .then(response => this.componentDidMount())
+        // .then(this.setState(prevState => ({
+        //     ...prevState,
+        //     [shelf]: [
+        //         ...shelf,
+        //         book: {
+        //             ...book,
+        //             shelf: [shelf]
+        //         }
+        //     ]
+        // })))
+        // book.shelf = shelf
+        // }
+
+        // updatedBooks.push(book)
+        // }
+
+
+        BooksAPI.update(book, shelf)
+            .then(() => this.componentDidMount())
 
         // this.componentDidMount()
     }
@@ -89,21 +105,18 @@ export default class Home extends Component {
                     <div className="list-books-content">
                         <div>
                             <BookShelf
-                                key="1"
                                 title="Currently Reading"
                                 books={this.state.currentlyReading}
                                 changeShelf={this.changeShelf}
                             />
 
                             <BookShelf
-                                key="2"
                                 title="Want to Read"
                                 books={this.state.wantToRead}
                                 changeShelf={this.changeShelf}
                             />
 
                             <BookShelf
-                                key="3"
                                 title="Read"
                                 books={this.state.read}
                                 changeShelf={this.changeShelf}

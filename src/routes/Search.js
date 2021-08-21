@@ -1,7 +1,58 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
+import * as BookAPI from '../BooksAPI'
+import SearchResult from './SearchResult'
 
 export default class Search extends Component {
+    constructor() {
+        super()
+        this.state = {
+            query: "",
+            result: []
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+        this.search = this.search.bind(this)
+        this.updateResult = this.updateResult.bind(this)
+    }
+
+    handleChange(event) {
+        console.log('query before', this.state.query)
+        console.log('value', event.target)
+
+        this.setState({
+            query: event.target.value
+        }, this.search)
+
+        // const { name, value } = event.target
+        // this.setState({
+        //     [name]: value
+        // })
+
+
+        // console.log('query', this.state.query)
+        // console.log('query', this.state.query)
+
+        // this.search()
+    }
+
+    search() {
+        // let result = []
+        // console.log(this.state.query.trim())
+        BookAPI.search(this.state.query.trim())
+            .then(response => this.setState({
+                result: response
+            }))
+            .then(() => console.log(this.state.result))
+
+    }
+
+    updateResult(book, shelf) {
+        BookAPI.update(book, shelf)
+
+        this.search()
+    }
+
     render() {
         return (
             <Route path='/search'>
@@ -19,13 +70,20 @@ export default class Search extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                            <input type="text" placeholder="Search by title or author" />
-
+                            <input
+                                type="text"
+                                name="query"
+                                placeholder="Search by title or author"
+                                onChange={this.handleChange}
+                                value={this.state.query}
+                            />
                         </div>
                     </div>
-                    <div className="search-books-results">
-                        <ol className="books-grid"></ol>
-                    </div>
+
+                    <SearchResult
+                        result={this.state.result}
+                        updateResult={this.updateResult}
+                    />
                 </div>
             </Route>
         )
