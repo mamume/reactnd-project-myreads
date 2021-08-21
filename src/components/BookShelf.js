@@ -1,5 +1,5 @@
 import React from 'react'
-import Book from '../routes/Book'
+import Book from './Book'
 
 export default function BookShelf(props) {
     return (
@@ -12,7 +12,6 @@ export default function BookShelf(props) {
                     {props.books.map(book => (
                         <li key={book.id}>
                             <Book
-                                // book={book}
                                 {...book}
                                 changeShelf={props.changeShelf}
                             />
