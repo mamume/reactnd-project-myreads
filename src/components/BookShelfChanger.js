@@ -2,31 +2,12 @@ import React, { Component } from 'react'
 import * as BookAPI from "../BooksAPI"
 
 export default class BookShelfChanger extends Component {
-    // console.log(props)
-    // constructor() {
-    //     super()
-
-    //     // this.getShelf = this.getShelf.bind(this)
-    //     this.shelf = BookAPI.get(this.props.id).then(response => response.shelf)
-    // }
-
+    // State of current shelf, even if its undefined
     state = {
         shelf: this.props.shelf
     }
 
-    // getShelf(bookID) {
-    //     // let shelf = ""
-    //     const shelf = BookAPI.get(bookID)
-    //         .then(response => response.shelf)
-
-    //     return shelf
-    // console.log(shelf)
-    // }
-
-    // componentDidMount() {
-
-    // }
-
+    // If shelf changed from select, change shelf state
     handleState(event) {
         this.setState({
             shelf: event.target.value
@@ -34,13 +15,15 @@ export default class BookShelfChanger extends Component {
     }
 
     render() {
+        // IF book has no shelf (result of search API) 
         if (!this.state.shelf)
+            // Get the shelf value using API and alternate shelf state
             BookAPI.get(this.props.id)
                 .then(response => this.setState({ shelf: response.shelf }))
 
-
         return (
             <div className="book-shelf-changer" >
+                {/* Render select using changeShelf from props and handleState */}
                 <select onChange={(event) => { this.props.changeShelf(this.props, event.target.value); this.handleState(event) }} value={this.state.shelf}>
                     <option value="move" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>

@@ -1,5 +1,5 @@
 import React from 'react'
-import BookShelfChanger from '../routes/BookShelfChanger'
+import BookShelfChanger from './BookShelfChanger'
 
 export default function Book(props) {
     return (
